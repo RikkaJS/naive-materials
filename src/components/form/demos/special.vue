@@ -3,9 +3,6 @@ import { NCard } from 'naive-ui'
 import { type FormProps, RForm } from '..'
 
 const form: FormProps = {
-  props: {
-    labelWidth: 80,
-  },
   items: [
     {
       component: {

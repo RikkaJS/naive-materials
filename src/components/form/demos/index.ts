@@ -1,3 +1,5 @@
-export { default as Basic } from './basic.vue'
-export { default as Nested } from './nested.vue'
-export { default as Special } from './special.vue'
+export { default as Basic } from './Basic.vue'
+export { default as Nested } from './Nested.vue'
+export { default as Special } from './Special.vue'
+export { default as Verify } from './Verify.vue'
+export { default as Linkage } from './Linkage.vue'

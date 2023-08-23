@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { provide, ref, unref } from 'vue'
+import { provide, ref, unref, watch } from 'vue'
 import { NButton, NForm, NFormItem, NSpace } from 'naive-ui'
+import { clone, set } from 'lodash-es'
 import type { FormActionProps, FormItemProps, FormProps } from './interface'
 import FormGrid from './FormGrid.vue'
 import { formModelInjectionKey } from './config'
+import { isVisibleOrHidden } from './utils'
 
 defineOptions({
   name: 'RForm',
@@ -14,6 +16,7 @@ const props = withDefaults(defineProps<FormProps>(), {})
 const emits = defineEmits<{
   submit: [value: any]
   reset: []
+  validateError: [err: any]
 }>()
 
 const slots = defineSlots<{
@@ -23,21 +26,57 @@ const slots = defineSlots<{
 const formRef = ref()
 
 const model = ref<any>({})
+const levelItems = ref<FormItemProps[]>([])
 
 provide(formModelInjectionKey, {
   model,
 })
 
-function getFieldsValue() {
-  return unref(model)
+function initModel() {
+  loopInitValue(props.items || [])
+}
+
+function getModel() {
+  const cloneModel = clone(unref(model))
+
+  for (let i = 0; i < unref(levelItems).length; i++) {
+    const { visible, field } = unref(levelItems)[i]
+
+    if (field && !isVisibleOrHidden(visible, { model, field })) {
+      delete cloneModel[field]
+      continue
+    }
+  }
+
+  return unref(cloneModel)
+}
+
+function setModel(value: any) {
+  for (const key in value)
+    set(unref(model), key, value[key])
+}
+
+async function validate() {
+  try {
+    await unref(formRef).validate()
+  }
+  catch (error: any) {
+    throw new Error(error)
+  }
 }
 
 function restoreValidation() {
   unref(formRef).restoreValidation()
 }
 
-function handleSubmit() {
-  emits('submit', getFieldsValue())
+async function handleSubmit() {
+  try {
+    await validate()
+    emits('submit', getModel())
+  }
+  catch (err) {
+    emits('validateError', err)
+  }
 }
 
 function handleReset() {
@@ -48,17 +87,32 @@ function handleReset() {
 
 function loopInitValue(array: FormItemProps[]) {
   for (let i = 0; i < array.length; i++) {
-    const { field, items } = array[i]
-    if (field)
-      model.value[field] = null
+    const { field, defaultValue, visible, items } = array[i]
+
+    levelItems.value.push(array[i])
+
+    if (field && isVisibleOrHidden(visible, { model, field }))
+      model.value[field] = defaultValue ?? null
 
     if (items)
       loopInitValue(items)
   }
 }
 
+watch(
+  () => props.items,
+  () => {
+    initModel()
+  },
+  {
+    immediate: true,
+  },
+)
+
 defineExpose({
-  getFieldsValue,
+  getModel,
+  setModel,
+  validate,
   restoreValidation,
 })
 </script>

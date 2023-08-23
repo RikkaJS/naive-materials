@@ -11,6 +11,7 @@ const form: FormProps = {
     {
       field: 'name',
       label: '姓名',
+      defaultValue: 'Rikka',
       component: {
         name: 'Input',
         props: {
@@ -22,12 +23,6 @@ const form: FormProps = {
       },
     },
   ],
-  onSubmit: (value: any) => {
-    console.log('submit', value)
-  },
-  onReset: () => {
-    console.log('reset')
-  },
 }
 </script>
 

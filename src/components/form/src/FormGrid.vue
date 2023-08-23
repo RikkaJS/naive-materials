@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { provide, toRef } from 'vue'
+import { inject, provide, toRef } from 'vue'
 import { NGi, NGrid } from 'naive-ui'
-import type { FormGridProps } from './interface'
+import type { FormGridProps, FormItemProps, FormItemVisibleType } from './interface'
 import FormItem from './FormItem.vue'
-import { formGridInjectionKey } from './config'
+import { formGridInjectionKey, formModelInjectionKey } from './config'
+import { ifFunction, isVisible } from './utils'
 
 defineOptions({
   name: 'RFormGrid',
@@ -14,6 +15,16 @@ const props = withDefaults(defineProps<FormGridProps>(), {})
 provide(formGridInjectionKey, {
   gridProps: toRef(props, 'gridProps', {}),
 })
+
+const { model } = inject(formModelInjectionKey)!
+
+function isShow(visible?: FormItemVisibleType) {
+  return isVisible(visible, { model })
+}
+
+function getProp(item: FormItemProps) {
+  return ifFunction(item.giProps, { model, field: item.field })
+}
 </script>
 
 <template>
@@ -22,13 +33,15 @@ provide(formGridInjectionKey, {
     item-responsive
     v-bind="gridProps"
   >
-    <NGi
-      v-for="(item, index) in items"
-      :key="index"
-      :span="24"
-      v-bind="item.giProps"
-    >
-      <FormItem v-bind="item" />
-    </NGi>
+    <template v-for="(item, index) in items">
+      <NGi
+        v-if="isShow(item.visible)"
+        :key="index"
+        :span="24"
+        v-bind="getProp(item)"
+      >
+        <FormItem v-bind="item" />
+      </NGi>
+    </template>
   </NGrid>
 </template>
