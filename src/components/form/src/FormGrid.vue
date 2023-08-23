@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inject, provide, toRef } from 'vue'
 import { NGi, NGrid } from 'naive-ui'
-import type { FormGridProps, FormItemProps, FormItemVisibleType } from './interface'
+import type { FormGridProps, FormItemProps } from './interface'
 import FormItem from './FormItem.vue'
 import { formGridInjectionKey, formModelInjectionKey } from './config'
 import { ifFunction, isVisible } from './utils'
@@ -18,7 +18,7 @@ provide(formGridInjectionKey, {
 
 const { model } = inject(formModelInjectionKey)!
 
-function isShow(visible?: FormItemVisibleType) {
+function isShow(visible?: FormItemProps['visible']) {
   return isVisible(visible, { model })
 }
 

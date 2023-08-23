@@ -1,7 +1,28 @@
 {
-  "name": "rikka-naive",
-  "version": "0.0.0",
-  "private": true,
+  "name": "@rikkajs/rikka-naive",
+  "type": "module",
+  "version": "0.0.5",
+  "private": false,
+  "description": "Naive UI PRO",
+  "author": "RikkaJS <mikasa33@qq.com> (https://github.com/RikkaJS/)",
+  "license": "MIT",
+  "homepage": "https://github.com/RikkaJS/rikka-naive",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RikkaJS/rikka-naive.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RikkaJS/rikka-naive/issues",
+    "email": "mikasa33@qq.com"
+  },
+  "keywords": [
+    "rikka-naive",
+    "naive-ui"
+  ],
+  "main": "dist/rikka-naive.umd.cjs",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -15,7 +36,6 @@
     "docs:preview": "vitepress preview docs --port 5174"
   },
   "dependencies": {
-    "@unocss/reset": "^0.55.1",
     "lodash-es": "^4.17.21",
     "naive-ui": "^2.34.4",
     "vue": "^3.3.4"
@@ -44,5 +64,8 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "directories": {
+    "doc": "docs"
   }
 }

@@ -89,6 +89,7 @@ function loopInitValue(array: FormItemProps[]) {
   for (let i = 0; i < array.length; i++) {
     const { field, defaultValue, visible, items } = array[i]
 
+    // @ts-expect-error
     levelItems.value.push(array[i])
 
     if (field && isVisibleOrHidden(visible, { model, field }))

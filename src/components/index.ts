@@ -1,2 +1,2 @@
-export * from './form'
-export * from './table'
+export { install } from './preset'
+export * from './components'
