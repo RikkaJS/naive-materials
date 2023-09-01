@@ -12,6 +12,8 @@ export type {
   FormProps,
   FormGridProps,
   FormItemVisibleType,
+  FormItemContext,
+  FormItemHook,
   FormItemProps,
   FormComponentType,
   FormComponentProps,

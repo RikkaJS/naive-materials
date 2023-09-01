@@ -1,7 +1,15 @@
 import { defineConfig } from 'vitepress'
+import { URL, fileURLToPath } from 'node:url'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  vite: {
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('../../src', import.meta.url)),
+      },
+    },
+  },
   title: 'Rikka Naive',
   description: '基于 Naive UI 的二次封装',
   themeConfig: {

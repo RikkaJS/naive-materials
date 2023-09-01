@@ -32,25 +32,31 @@ export interface FormGridProps {
 
 export type FormItemVisibleType = boolean | 'visible' | 'none' | 'hidden' // 显示、隐藏、隐藏保留值
 
-export interface FormContext {
+export interface FormItemContext {
   model: any
-  field: string
+  field?: string
+}
+
+export interface FormItemHook {
+  get?: ((ctx: FormItemContext) => void)
+  set?: ((ctx: FormItemContext) => void)
 }
 
 export interface FormItemProps {
-  props?: NFormItemProps | ((ctx: FormContext) => NFormItemProps)
-  giProps?: GridItemProps | ((ctx: FormContext) => GridItemProps)
+  props?: NFormItemProps | ((ctx: FormItemContext) => NFormItemProps)
+  giProps?: GridItemProps | ((ctx: FormItemContext) => GridItemProps)
   slots?: any
   field?: string
   label?: string
   defaultValue?: any
-  rule?: FormItemRule | Array<FormItemRule> | ((ctx: FormContext) => FormItemRule | Array<FormItemRule>)
-  visible?: FormItemVisibleType | ((ctx: FormContext) => FormItemVisibleType)
+  rule?: FormItemRule | Array<FormItemRule> | ((ctx: FormItemContext) => FormItemRule | Array<FormItemRule>)
+  visible?: FormItemVisibleType | ((ctx: FormItemContext) => FormItemVisibleType)
+  hook?: FormItemHook
   component?: FormComponentProps
   items?: FormItemProps[] // 只有嵌套组件需要传递此属性
 }
 
-export type FormComponentType = 'Card' | 'Divider' | 'Input' | 'Radio' | 'Tabs'
+export type FormComponentType = 'Card' | 'Divider' | 'Input' | 'InputNumber' | 'Radio' | 'Tabs'
 
 export interface FormComponentProps {
   props?: any

@@ -40,20 +40,38 @@ function getModel() {
   const cloneModel = clone(unref(model))
 
   for (let i = 0; i < unref(levelItems).length; i++) {
-    const { visible, field } = unref(levelItems)[i]
+    const item = unref(levelItems)[i]
+    const { visible, field } = item
 
     if (field && !isVisibleOrHidden(visible, { model, field })) {
       delete cloneModel[field]
       continue
     }
+
+    if (item?.hook?.get)
+      item.hook.get({ model: cloneModel, field })
   }
 
   return unref(cloneModel)
 }
 
 function setModel(value: any) {
-  for (const key in value)
-    set(unref(model), key, value[key])
+  for (let i = 0; i < unref(levelItems).length; i++) {
+    const item = unref(levelItems)[i]
+    const { field } = item
+
+    if (item?.hook?.set) {
+      try {
+        item.hook.set({ model: value, field })
+      }
+      catch (err: any) {
+        console.error(`${field} 执行 hook.set 失败`)
+      }
+    }
+
+    set(unref(model), field!, value[field!])
+  }
+    
 }
 
 async function validate() {
