@@ -1,28 +1,31 @@
 {
-  "name": "@rikkajs/rikka-naive",
+  "name": "@rikkajs/naive-materials",
   "type": "module",
   "version": "0.0.5",
   "private": false,
-  "description": "Naive UI PRO",
+  "description": "Naive UI Materials",
   "author": "RikkaJS <mikasa33@qq.com> (https://github.com/RikkaJS/)",
   "license": "MIT",
-  "homepage": "https://github.com/RikkaJS/rikka-naive",
+  "homepage": "https://github.com/RikkaJS/naive-materials",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RikkaJS/rikka-naive.git"
+    "url": "git+https://github.com/RikkaJS/naive-materials.git"
   },
   "bugs": {
-    "url": "https://github.com/RikkaJS/rikka-naive/issues",
+    "url": "https://github.com/RikkaJS/naive-materials/issues",
     "email": "mikasa33@qq.com"
   },
   "keywords": [
-    "rikka-naive",
+    "naive-materials",
     "naive-ui"
   ],
-  "main": "dist/rikka-naive.umd.cjs",
+  "main": "dist/naive-materials.umd.cjs",
   "files": [
-    "dist/*"
+    "es/*",
+    "lib/*"
   ],
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -56,6 +59,7 @@
     "typescript": "~5.1.6",
     "unocss": "^0.55.1",
     "vite": "^4.4.6",
+    "vite-plugin-dts": "^3.5.3",
     "vitepress": "1.0.0-rc.4",
     "vue-tsc": "^1.8.6"
   },

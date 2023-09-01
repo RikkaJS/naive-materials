@@ -24,7 +24,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/RikkaJS/rikka-naive' },
+      { icon: 'github', link: 'https://github.com/RikkaJS/naive-materials' },
     ],
   },
 })
