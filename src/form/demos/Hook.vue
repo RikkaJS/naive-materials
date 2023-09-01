@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { NCard } from 'naive-ui'
-import { type FormProps, type FormContext, RForm } from '..'
+import { type FormProps, RForm } from '..'
 import { computed, onMounted, ref, unref } from 'vue';
 
 const form: FormProps = {
   props: {
     labelWidth: 80,
   },
-  action: true,
   items: [
     {
       field: 'age',
@@ -19,10 +18,10 @@ const form: FormProps = {
         },
       },
       hook: {
-        get: ({ model }: FormContext) => {
+        get: ({ model }) => {
           model.age = model.age.toString()
         },
-        set: ({ model }: FormContext) => {
+        set: ({ model }) => {
           model.age = Number(model.age)
         }
       }
@@ -41,7 +40,6 @@ onMounted(() => {
 
 <template>
   <NCard>
-    <pre>{{ model }}</pre>
     <pre>类型：{{ typeof model?.age }}</pre>
     <RForm
       ref="formRef"
