@@ -9,28 +9,16 @@
   "exclude": [
     "node_modules",
     "dist",
-    "**/*.js"
+    "**/*.js",
+    "**/demos"
   ],
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "allowJs": false,
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "bundler",
-    "skipLibCheck": true,
-    "noUnusedLocals": false,
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "jsxImportSource": "vue",
-    "sourceMap": false,
+    "declaration": true,
+    "declarationDir": "es",
     "composite": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "naive-ui": ["node_modules/naive-ui"]
     },
     "types": ["naive-ui/volar"]
   }

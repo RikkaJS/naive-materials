@@ -2,33 +2,13 @@ import { URL, fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-// import dts from 'vite-plugin-dts'
 import UnoCSS from 'unocss/vite'
-
-const outDir = 'es'
 
 export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
     UnoCSS(),
-    // dts({
-    //   include: ['src/components'],
-    //   exclude: ['node_modules', 'src/components/*/demos'],
-    //   outDir,
-    //   compilerOptions: {
-    //     sourceMap: false,
-    //     declarationMap: true,
-    //     paths: {
-    //       '@/*': ['src/*'],
-    //       'naive-ui': ['node_modules/naive-ui'],
-    //       vue: ['node_modules/vue'],
-    //       'lodash-es': ['node_modules/lodash-es'],
-    //     }
-    //   },
-    //   copyDtsFiles: true,
-    //   tsconfigPath: 'tsconfig.json',
-    // }),
   ],
   resolve: {
     alias: {
@@ -36,24 +16,26 @@ export default defineConfig({
     },
   },
   build: {
-    outDir,
-    sourcemap: true,
+    outDir: 'es',
     rollupOptions: {
       external: ['vue', 'naive-ui', 'lodash-es'],
       output: [
         {
           format: 'cjs',
           preserveModules: true,
-          preserveModulesRoot: __dirname,
+          preserveModulesRoot: 'src',
           dir: 'lib',
           entryFileNames: '[name].cjs'
         },
         {
           format: 'es',
           preserveModules: true,
-          preserveModulesRoot: __dirname,
+          preserveModulesRoot: 'src',
           dir: 'es',
-          entryFileNames: '[name].mjs'
+          entryFileNames: '[name].js'
+          // entryFileNames: (chunkInfo: any) => {
+          //   return chunkInfo.name.replace(/\.vue/g, '') + '.js'
+          // }
         },
       ],
     },
