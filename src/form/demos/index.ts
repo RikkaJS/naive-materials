@@ -1,4 +1,5 @@
 export { default as Basic } from './Basic.vue'
+export { default as Path } from './Path.vue'
 export { default as Hook } from './Hook.vue'
 export { default as Nested } from './Nested.vue'
 export { default as Special } from './Special.vue'

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { NCard } from 'naive-ui'
+import ConfigProvider from '@/demo/ConfigProvider.vue'
 import { type FormProps, RForm } from '..'
 
 const form: FormProps = {
@@ -29,7 +30,9 @@ const form: FormProps = {
 </script>
 
 <template>
-  <NCard>
-    <RForm v-bind="form" />
-  </NCard>
+  <ConfigProvider>
+    <NCard>
+      <RForm v-bind="form" />
+    </NCard>
+  </ConfigProvider>
 </template>

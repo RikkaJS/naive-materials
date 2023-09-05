@@ -1,4 +1,5 @@
-import type { ButtonProps, FormItemRule, GridItemProps, GridProps, FormItemProps as NFormItemProps, FormProps as NFormProps, RadioProps } from 'naive-ui'
+import type { CustomButtonProps } from '@/interface'
+import type { FormItemRule, GridItemProps, GridProps, FormItemProps as NFormItemProps, FormProps as NFormProps, RadioProps } from 'naive-ui'
 import type { Ref } from 'vue'
 
 export interface FormModelInjection {
@@ -9,11 +10,7 @@ export interface FormGridInjection {
   gridProps: Ref<GridProps>
 }
 
-interface CustomButtonProps extends ButtonProps {
-  title?: string
-}
-
-export interface FormActionProps {
+export interface FormAction {
   submit?: CustomButtonProps
   reset?: CustomButtonProps
 }
@@ -22,7 +19,7 @@ export interface FormProps {
   props?: NFormProps
   gridProps?: GridProps
   items?: FormItemProps[]
-  action?: boolean | FormActionProps
+  action?: boolean | FormAction
 }
 
 export interface FormGridProps {
@@ -30,9 +27,9 @@ export interface FormGridProps {
   items?: FormItemProps[]
 }
 
-export type FormItemVisibleType = boolean | 'visible' | 'none' | 'hidden' // 显示、隐藏、隐藏保留值
+export type FormItemVisible = boolean | 'visible' | 'none' | 'hidden' // 显示、隐藏、隐藏保留值
 
-export interface FormItemContext {
+export type FormItemContext = {
   model: any
   field?: string
 }
@@ -50,7 +47,7 @@ export interface FormItemProps {
   label?: string
   defaultValue?: any
   rule?: FormItemRule | Array<FormItemRule> | ((ctx: FormItemContext) => FormItemRule | Array<FormItemRule>)
-  visible?: FormItemVisibleType | ((ctx: FormItemContext) => FormItemVisibleType)
+  visible?: FormItemVisible | ((ctx: FormItemContext) => FormItemVisible)
   hook?: FormItemHook
   component?: FormComponentProps
   items?: FormItemProps[] // 只有嵌套组件需要传递此属性

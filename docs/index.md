@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: Rikka Naive
+  name: Naive Materials
   text: 简单易上手的组件库
   tagline: 基于 Naive UI 二次封装，开箱即用
   actions:

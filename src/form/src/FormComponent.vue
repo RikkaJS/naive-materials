@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed, inject, unref } from 'vue'
 import { Component } from './component'
 import type { FormComponentProps, FormComponentType } from './interface'
 import { formGridInjectionKey, formModelInjectionKey } from './config'
 import FormGrid from './FormGrid.vue'
+import { get, set } from 'lodash-es'
 
 defineOptions({
   name: 'RFormComponent',
@@ -15,13 +16,20 @@ const { model } = inject(formModelInjectionKey)!
 const { gridProps } = inject(formGridInjectionKey)!
 
 const component = computed(() => Component.get(props.name as FormComponentType))
+
+const value = computed({
+  get: () => get(unref(model), props.field!),
+  set: (val: any) => {
+    set(unref(model), props.field!, val)
+  }
+})
 </script>
 
 <template>
   <Component
     :is="component"
     v-bind="props.props"
-    v-model:value="model[field as string]"
+    v-model:value="value"
   >
     <template
       v-for="(slot, key) in slots"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { NCard } from 'naive-ui'
+import ConfigProvider from '@/demo/ConfigProvider.vue'
 import { computed, ref, unref } from 'vue'
 import { type FormProps, RForm } from '..'
 
@@ -44,11 +45,13 @@ const model = computed(() => unref(formRef)?.getModel())
 </script>
 
 <template>
-  <NCard>
-    <pre>{{ model }}</pre>
-    <RForm
-      ref="formRef"
-      v-bind="form"
-    />
-  </NCard>
+  <ConfigProvider>
+    <NCard>
+      <pre>{{ model }}</pre>
+      <RForm
+        ref="formRef"
+        v-bind="form"
+      />
+    </NCard>
+  </ConfigProvider>
 </template>

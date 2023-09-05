@@ -18,7 +18,7 @@ export default defineConfig({
   build: {
     outDir: 'es',
     rollupOptions: {
-      external: ['vue', 'naive-ui', 'lodash-es'],
+      external: ['vue', '@vueuse/core', 'naive-ui', 'lodash-es'],
       output: [
         {
           format: 'cjs',

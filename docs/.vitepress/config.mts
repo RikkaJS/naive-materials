@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, postcssIsolateStyles } from 'vitepress'
 import { URL, fileURLToPath } from 'node:url'
 
 // https://vitepress.dev/reference/site-config
@@ -9,8 +9,17 @@ export default defineConfig({
         '@': fileURLToPath(new URL('../../src', import.meta.url)),
       },
     },
+    css: {
+      postcss: {
+        plugins: [
+          postcssIsolateStyles({
+            includeFiles: [/vp-doc\.css/]
+          })
+        ]
+      }
+    }
   },
-  title: 'Rikka Naive',
+  title: 'Naive Materials',
   description: '基于 Naive UI 的二次封装',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

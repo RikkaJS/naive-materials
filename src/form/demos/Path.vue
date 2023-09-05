@@ -2,44 +2,45 @@
 import { NCard } from 'naive-ui'
 import ConfigProvider from '@/demo/ConfigProvider.vue'
 import { type FormProps, RForm } from '..'
+import { onMounted, ref, unref } from 'vue';
 
 const form: FormProps = {
   props: {
     labelWidth: 80,
   },
+  action: true,
   items: [
     {
+      field: 'user.name',
+      label: '姓名',
       component: {
-        name: 'Card',
+        name: 'Input',
         props: {
-          title: '住址信息',
+          placeholder: '请输入姓名',
         },
       },
-      items: [
-        {
-          field: 'address',
-          label: '地址',
-          component: {
-            name: 'Input',
-          },
-        },
-        {
-          field: 'zip',
-          label: '邮编',
-          component: {
-            name: 'Input',
-          },
-        },
-      ],
     },
   ],
 }
+
+const formRef = ref()
+
+onMounted(() => {
+  unref(formRef).setModel({
+    user: {
+      name: 'Rikka'
+    }
+  })
+})
 </script>
 
 <template>
   <ConfigProvider>
     <NCard>
-      <RForm v-bind="form" />
+      <RForm 
+        ref="formRef"
+        v-bind="form" 
+      />
     </NCard>
   </ConfigProvider>
 </template>

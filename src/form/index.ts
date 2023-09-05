@@ -8,10 +8,10 @@ export { default as RFormTabs } from './src/FormTabs.vue'
 export type {
   FormModelInjection,
   FormGridInjection,
-  FormActionProps,
+  FormAction,
   FormProps,
   FormGridProps,
-  FormItemVisibleType,
+  FormItemVisible,
   FormItemContext,
   FormItemHook,
   FormItemProps,

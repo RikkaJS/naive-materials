@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { provide, ref, unref, watch } from 'vue'
 import { NButton, NForm, NFormItem, NSpace } from 'naive-ui'
-import { clone, set } from 'lodash-es'
-import type { FormActionProps, FormItemProps, FormProps } from './interface'
+import { clone, get, set } from 'lodash-es'
+import type { FormAction, FormItemProps, FormProps } from './interface'
 import FormGrid from './FormGrid.vue'
 import { formModelInjectionKey } from './config'
 import { isVisibleOrHidden } from './utils'
@@ -69,7 +69,7 @@ function setModel(value: any) {
       }
     }
 
-    set(unref(model), field!, value[field!])
+    set(unref(model), field!, get(value, field!))
   }
     
 }
@@ -111,7 +111,7 @@ function loopInitValue(array: FormItemProps[]) {
     levelItems.value.push(array[i])
 
     if (field && isVisibleOrHidden(visible, { model, field }))
-      model.value[field] = defaultValue ?? null
+      set(unref(model), field!, defaultValue ?? null)
 
     if (items)
       loopInitValue(items)
@@ -161,16 +161,16 @@ defineExpose({
         <template v-else>
           <NButton
             type="primary"
-            v-bind="(action as FormActionProps)?.submit"
+            v-bind="(action as FormAction)?.submit"
             @click="handleSubmit"
           >
-            {{ (action as FormActionProps)?.submit?.title || '提交' }}
+            {{ (action as FormAction)?.submit?.title || '提交' }}
           </NButton>
           <NButton
-            v-bind="(action as FormActionProps)?.reset"
+            v-bind="(action as FormAction)?.reset"
             @click="handleReset"
           >
-            {{ (action as FormActionProps)?.reset?.title || '重置' }}
+            {{ (action as FormAction)?.reset?.title || '重置' }}
           </NButton>
         </template>
       </NSpace>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { NCard } from 'naive-ui'
+import ConfigProvider from '@/demo/ConfigProvider.vue'
 import { type FormProps, RForm } from '..'
 import { computed, onMounted, ref, unref } from 'vue';
 
@@ -19,7 +20,7 @@ const form: FormProps = {
       },
       hook: {
         get: ({ model }) => {
-          model.age = model.age.toString()
+          model.age = model.age?.toString()
         },
         set: ({ model }) => {
           model.age = Number(model.age)
@@ -39,11 +40,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <NCard>
-    <pre>类型：{{ typeof model?.age }}</pre>
-    <RForm
-      ref="formRef"
-      v-bind="form"
-    />
-  </NCard>
+  <ConfigProvider>
+    <NCard>
+      <pre>类型：{{ typeof model?.age }}</pre>
+      <RForm
+        ref="formRef"
+        v-bind="form"
+      />
+    </NCard>
+  </ConfigProvider>
 </template>
