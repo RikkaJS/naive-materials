@@ -1,5 +1,5 @@
-import { defineConfig, postcssIsolateStyles } from 'vitepress'
 import { URL, fileURLToPath } from 'node:url'
+import { defineConfig, postcssIsolateStyles } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -13,11 +13,11 @@ export default defineConfig({
       postcss: {
         plugins: [
           postcssIsolateStyles({
-            includeFiles: [/vp-doc\.css/]
-          })
-        ]
-      }
-    }
+            includeFiles: [/vp-doc\.css/],
+          }),
+        ],
+      },
+    },
   },
   title: 'Naive Materials',
   description: '基于 Naive UI 的二次封装',
@@ -32,8 +32,8 @@ export default defineConfig({
       {
         text: '组件',
         items: [
-          { text: 'Form 表单', link: '/components/form.md' },
-          { text: 'Table 表格', link: '/components/table.md' },
+          { text: 'Form 表单', link: '/components/form/index.md' },
+          { text: 'Table 表格', link: '/components/table/index.md' },
           { text: 'Markdown Examples', link: '/markdown-examples' },
           { text: 'Runtime API Examples', link: '/api-examples' },
         ],

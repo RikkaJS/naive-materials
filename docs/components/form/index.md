@@ -5,7 +5,7 @@
 ## 演示
 
 <script setup lang="ts">
-import { Basic, Path, Hook, Nested, Special, Verify, Linkage } from '@/form/demos/index'
+import { Basic, Path, Hook, Nested, Special, Verify, Linkage } from './demos'
 </script>
 
 ### 基础
@@ -109,7 +109,7 @@ const form: FormProps = {
 | defaultValue | 默认值，会覆盖 `FormComponentProps` 里的 `defaultValue` 属性 | `any` | - |
 | rule | 验证表单项的规则 | `FormItemRule \| Array<FormItemRule> \| (ctx: FormItemContext) => FormItemRule \| Array<FormItemRule>` | - |
 | visible | 显示状态，`false \| 'none'` 隐藏不会返回表单项值，`'hidden'` 隐藏但会返回表单项值 | `true \| false \| 'visible' \| 'none' \| 'hidden' \| (ctx: FormItemContext) => true \| false \| 'visible' \| 'none' \| 'hidden'` | `true` |
-| hook | 取值、赋值时的钩子函数，详情见 FormItemHook Type | `FormItemHook` | - |
+| hook | 取值、赋值时的钩子函数，详情见 FormItemHook Properties | `FormItemHook` | - |
 | component | 子组件内容，详情见 FormComponent Props | `FormComponentProps` | - |
 | items | **嵌套组件**的子组件内容，详情见 FormItem Props | `Array<FormItemProps>` | `[]` |
 
