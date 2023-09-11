@@ -4,6 +4,7 @@ export { default as RFormGrid } from './src/FormGrid.vue'
 export { default as RFormItem } from './src/FormItem.vue'
 export { default as RFormRadio } from './src/FormRadio.vue'
 export { default as RFormTabs } from './src/FormTabs.vue'
+export { default as RFormText } from './src/FormText.vue'
 
 export type {
   FormModelInjection,
@@ -19,4 +20,5 @@ export type {
   FormComponentProps,
   FormTabsProps,
   FormRadioProps,
+  FormTextProps,
 } from './src/interface'

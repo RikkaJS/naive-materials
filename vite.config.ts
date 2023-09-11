@@ -25,14 +25,14 @@ export default defineConfig({
           preserveModules: true,
           preserveModulesRoot: 'src',
           dir: 'lib',
-          entryFileNames: '[name].cjs'
+          entryFileNames: '[name].cjs',
         },
         {
           format: 'es',
           preserveModules: true,
           preserveModulesRoot: 'src',
           dir: 'es',
-          entryFileNames: '[name].js'
+          entryFileNames: '[name].js',
           // entryFileNames: (chunkInfo: any) => {
           //   return chunkInfo.name.replace(/\.vue/g, '') + '.js'
           // }

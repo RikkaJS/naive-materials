@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, inject, unref } from 'vue'
+import { get, set } from 'lodash-es'
 import { Component } from './component'
 import type { FormComponentProps, FormComponentType } from './interface'
 import { formGridInjectionKey, formModelInjectionKey } from './config'
 import FormGrid from './FormGrid.vue'
-import { get, set } from 'lodash-es'
 
 defineOptions({
   name: 'RFormComponent',
@@ -15,13 +15,14 @@ const props = withDefaults(defineProps<FormComponentProps>(), {})
 const { model } = inject(formModelInjectionKey)!
 const { gridProps } = inject(formGridInjectionKey)!
 
-const component = computed(() => Component.get(props.name as FormComponentType))
+// 默认为文本 Text 组件
+const component = computed(() => Component.get((props.name || 'Text') as FormComponentType))
 
 const value = computed({
   get: () => get(unref(model), props.field!),
   set: (val: any) => {
     set(unref(model), props.field!, val)
-  }
+  },
 })
 </script>
 

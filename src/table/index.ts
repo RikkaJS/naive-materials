@@ -1,5 +1,12 @@
 export { default as RTable } from './src/Table.vue'
+export { default as RDataTable } from './src/DataTable.vue'
 
 export type {
-  TableProps
+  DataTableComponentType,
+  DataTableComponentProps,
+  DataTableFormatProps,
+  DataTableColumn,
+  DataTableLoad,
+  DataTableProps,
+  TableProps,
 } from './src/interface'

@@ -38,7 +38,6 @@ function getProp(prop: any) {
     </template>
 
     <FormComponent
-      v-if="component"
       v-bind="getProp(component)"
       :field="field"
       :items="items"

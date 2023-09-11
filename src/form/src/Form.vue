@@ -71,7 +71,6 @@ function setModel(value: any) {
 
     set(unref(model), field!, get(value, field!))
   }
-    
 }
 
 async function validate() {
@@ -107,7 +106,7 @@ function loopInitValue(array: FormItemProps[]) {
   for (let i = 0; i < array.length; i++) {
     const { field, defaultValue, visible, items } = array[i]
 
-    // @ts-expect-error
+    // @ts-expect-error 暂时先这样解决
     levelItems.value.push(array[i])
 
     if (field && isVisibleOrHidden(visible, { model, field }))

@@ -4,8 +4,8 @@ export interface CustomButtonProps extends ButtonProps {
   title?: string
 }
 
-export type DictType = {
-  value: any
-  label: any
+export interface DictType {
+  value: string | number
+  label: string | number
   type?: 'default' | 'primary' | 'info' | 'success' | 'warning' | 'error'
 }

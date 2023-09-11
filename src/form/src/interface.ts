@@ -1,6 +1,6 @@
-import type { CustomButtonProps } from '@/interface'
-import type { FormItemRule, GridItemProps, GridProps, FormItemProps as NFormItemProps, FormProps as NFormProps, RadioProps } from 'naive-ui'
+import type { FormItemRule, GridItemProps, GridProps, FormItemProps as NFormItemProps, FormProps as NFormProps, RadioProps, TextProps } from 'naive-ui'
 import type { Ref } from 'vue'
+import type { CustomButtonProps } from '@/interface'
 
 export interface FormModelInjection {
   model: Ref<any>
@@ -29,7 +29,7 @@ export interface FormGridProps {
 
 export type FormItemVisible = boolean | 'visible' | 'none' | 'hidden' // 显示、隐藏、隐藏保留值
 
-export type FormItemContext = {
+export interface FormItemContext {
   model: any
   field?: string
 }
@@ -53,13 +53,13 @@ export interface FormItemProps {
   items?: FormItemProps[] // 只有嵌套组件需要传递此属性
 }
 
-export type FormComponentType = 'Card' | 'Divider' | 'Input' | 'InputNumber' | 'Radio' | 'Tabs'
+export type FormComponentType = 'Card' | 'Divider' | 'Input' | 'InputNumber' | 'Radio' | 'Tabs' | 'Text'
 
 export interface FormComponentProps {
   props?: any
   slots?: any
   field?: string // 只用于组件间传值使用，不提供给使用者
-  name: string
+  name?: FormComponentType
   items?: FormItemProps[] // 只有特殊组件需要传递此属性
 }
 
@@ -74,4 +74,16 @@ export interface FormRadioProps {
   value: RadioProps['value']
   options: RadioProps[]
   type?: 'button'
+}
+
+export interface FormTextProps {
+  type?: TextProps['type']
+  strong?: TextProps['strong']
+  italic?: TextProps['italic']
+  underline?: TextProps['underline']
+  delete?: TextProps['delete']
+  code?: TextProps['code']
+  depth?: TextProps['depth']
+  tag?: TextProps['tag']
+  value: any
 }
