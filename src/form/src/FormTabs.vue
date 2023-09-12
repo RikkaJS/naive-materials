@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import { NTabPane, NTabs } from 'naive-ui'
 import type { FormTabsProps } from './interface'
+import { formGridInjectionKey } from './config'
+import FormGrid from './FormGrid.vue'
 
 defineOptions({
   name: 'RFormTabs',
@@ -9,12 +11,14 @@ defineOptions({
 
 const props = withDefaults(defineProps<FormTabsProps>(), {})
 
+const { gridProps } = inject(formGridInjectionKey)!
+
 const active = ref(props.items?.[0]?.name ?? 0)
 </script>
 
 <template>
   <NTabs
-    v-bind="$attrs"
+    v-bind="props"
     v-model:value="active"
   >
     <template
@@ -32,6 +36,12 @@ const active = ref(props.items?.[0]?.name ?? 0)
         >
           <Component
             :is="item.slot"
+            v-if="item.slot"
+          />
+          <FormGrid
+            v-else-if="item.items && item.items.length"
+            :grid-props="gridProps"
+            :items="item.items"
           />
         </NTabPane>
       </template>

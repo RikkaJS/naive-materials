@@ -1,4 +1,5 @@
 export { default as Basic } from './Basic.vue'
+export { default as Component } from './Component.vue'
 export { default as Hook } from './Hook.vue'
 export { default as Linkage } from './Linkage.vue'
 export { default as Nested } from './Nested.vue'

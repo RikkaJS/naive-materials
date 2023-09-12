@@ -3,8 +3,8 @@ import { computed, inject, unref } from 'vue'
 import { get, set } from 'lodash-es'
 import { Component } from './component'
 import type { FormComponentProps, FormComponentType } from './interface'
-import { formGridInjectionKey, formModelInjectionKey } from './config'
-import FormGrid from './FormGrid.vue'
+import { formModelInjectionKey } from './config'
+import { getDefaultValue } from './utils'
 
 defineOptions({
   name: 'RFormComponent',
@@ -13,15 +13,18 @@ defineOptions({
 const props = withDefaults(defineProps<FormComponentProps>(), {})
 
 const { model } = inject(formModelInjectionKey)!
-const { gridProps } = inject(formGridInjectionKey)!
 
 // 默认为文本 Text 组件
 const component = computed(() => Component.get((props.name || 'Text') as FormComponentType))
 
+// 特殊处理样式
+const isFullWidth = computed(() => !['Switch'].includes(props.name!))
+
 const value = computed({
-  get: () => get(unref(model), props.field!),
+  get: () => props.field ? get(unref(model), props.field) : getDefaultValue(props.name!),
   set: (val: any) => {
-    set(unref(model), props.field!, val)
+    if (props.field)
+      set(unref(model), props.field, val)
   },
 })
 </script>
@@ -31,6 +34,7 @@ const value = computed({
     :is="component"
     v-bind="props.props"
     v-model:value="value"
+    :class="{ 'r-form-component': isFullWidth }"
   >
     <template
       v-for="(slot, key) in slots"
@@ -40,15 +44,13 @@ const value = computed({
       <Component
         :is="slot"
         v-bind="slotProps"
-        :items="items"
-      />
-    </template>
-
-    <template v-if="items">
-      <FormGrid
-        :grid-props="gridProps"
-        :items="items"
       />
     </template>
   </Component>
 </template>
+
+<style lang="less" scoped>
+.r-form-component {
+  width: 100%;
+}
+</style>

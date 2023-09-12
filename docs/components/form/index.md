@@ -5,7 +5,7 @@
 ## 演示
 
 <script setup lang="ts">
-import { Basic, Path, Hook, Nested, Special, Verify, Linkage } from './demos'
+import { Basic, Path, Hook, Nested, Special, Verify, Linkage, Component } from './demos'
 </script>
 
 ### 基础
@@ -80,6 +80,12 @@ const form: FormProps = {
 表单在取值或赋值时的钩子函数
 
 <Hook />
+
+### 所有组件
+
+展示所有可用组件
+
+<Component />
 
 ## Form Props
 

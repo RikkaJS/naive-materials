@@ -47,11 +47,11 @@ const model = computed(() => unref(formRef)?.getModel())
 <template>
   <ConfigProvider>
     <NCard>
-      <pre>{{ model }}</pre>
       <RForm
         ref="formRef"
         v-bind="form"
       />
+      <pre>{{ model }}</pre>
     </NCard>
   </ConfigProvider>
 </template>

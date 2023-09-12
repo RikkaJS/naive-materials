@@ -2,9 +2,11 @@
 import { NFormItem } from 'naive-ui'
 import { inject } from 'vue'
 import FormComponent from './FormComponent.vue'
-import type { FormItemProps } from './interface'
+import FormContainer from './FormContainer.vue'
+import type { FormComponentProps, FormContainerType, FormItemProps } from './interface'
 import { formModelInjectionKey } from './config'
 import { ifFunction } from './utils'
+import { ContainerComponent } from './component'
 
 defineOptions({
   name: 'RFormItem',
@@ -16,6 +18,10 @@ const { model } = inject(formModelInjectionKey)!
 
 function getProp(prop: any) {
   return ifFunction(prop, { model, field: props.field })
+}
+
+function isContainer(component?: FormComponentProps) {
+  return component?.name ? !!ContainerComponent.get((component.name as FormContainerType)) : false
 }
 </script>
 
@@ -37,7 +43,15 @@ function getProp(prop: any) {
       />
     </template>
 
+    <FormContainer
+      v-if="isContainer(getProp(component))"
+      v-bind="getProp(component)"
+      :field="field"
+      :items="items"
+    />
+
     <FormComponent
+      v-else
       v-bind="getProp(component)"
       :field="field"
       :items="items"

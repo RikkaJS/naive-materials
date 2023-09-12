@@ -2,10 +2,10 @@
 import { provide, ref, unref, watch } from 'vue'
 import { NButton, NForm, NFormItem, NSpace } from 'naive-ui'
 import { clone, get, set } from 'lodash-es'
-import type { FormAction, FormItemProps, FormProps } from './interface'
+import type { FormAction, FormComponentType, FormItemProps, FormProps } from './interface'
 import FormGrid from './FormGrid.vue'
 import { formModelInjectionKey } from './config'
-import { isVisibleOrHidden } from './utils'
+import { getDefaultValue, isVisibleOrHidden } from './utils'
 
 defineOptions({
   name: 'RForm',
@@ -33,6 +33,7 @@ provide(formModelInjectionKey, {
 })
 
 function initModel() {
+  levelItems.value = []
   loopInitValue(props.items || [])
 }
 
@@ -98,22 +99,22 @@ async function handleSubmit() {
 
 function handleReset() {
   restoreValidation()
-  loopInitValue(props.items || [])
+  initModel()
   emits('reset')
 }
 
 function loopInitValue(array: FormItemProps[]) {
   for (let i = 0; i < array.length; i++) {
-    const { field, defaultValue, visible, items } = array[i]
+    const { field, defaultValue, visible, component, items } = array[i]
 
     // @ts-expect-error 暂时先这样解决
     levelItems.value.push(array[i])
 
     if (field && isVisibleOrHidden(visible, { model, field }))
-      set(unref(model), field!, defaultValue ?? null)
+      set(unref(model), field, defaultValue ?? getDefaultValue(component?.name as FormComponentType))
 
     if (items)
-      loopInitValue(items)
+      loopInitValue(items as FormItemProps[])
   }
 }
 

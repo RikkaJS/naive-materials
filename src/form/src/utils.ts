@@ -1,5 +1,5 @@
 import { isBoolean, isFunction, isString, isUndefined } from 'lodash-es'
-import type { FormItemProps } from './interface'
+import type { FormComponentType, FormItemProps } from './interface'
 
 export function isVisible(visible?: FormItemProps['visible'], params?: any) {
   visible = ifFunction(visible, params)
@@ -31,4 +31,11 @@ export function ifFunction(value: any, ctx?: any) {
   if (isFunction(value))
     value = value(ctx)
   return value
+}
+
+export function getDefaultValue(component: FormComponentType) {
+  if (['DynamicTags'].includes(component))
+    return []
+
+  return null
 }

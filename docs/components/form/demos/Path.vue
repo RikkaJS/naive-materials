@@ -19,6 +19,7 @@ const form: FormProps = {
           placeholder: '请输入姓名',
         },
       },
+      defaultValue: '666',
     },
   ],
 }
