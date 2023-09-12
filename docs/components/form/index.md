@@ -51,13 +51,13 @@ const form: FormProps = {
 
 <Path />
 
-### 嵌套
+### 容器
 
-某些情况下会在组件中嵌套一些输入框
+某些情况下会在容器组件中展示一些输入框
 
 <Nested />
 
-### 特殊
+### 特殊容器
 
 某些情况下会使用到一些特殊或自定义组件
 
@@ -117,7 +117,14 @@ const form: FormProps = {
 | visible | 显示状态，`false \| 'none'` 隐藏不会返回表单项值，`'hidden'` 隐藏但会返回表单项值 | `true \| false \| 'visible' \| 'none' \| 'hidden' \| (ctx: FormItemContext) => true \| false \| 'visible' \| 'none' \| 'hidden'` | `true` |
 | hook | 取值、赋值时的钩子函数，详情见 FormItemHook Properties | `FormItemHook` | - |
 | component | 子组件内容，详情见 FormComponent Props | `FormComponentProps` | - |
-| items | **嵌套组件**的子组件内容，详情见 FormItem Props | `Array<FormItemProps>` | `[]` |
+| items | **容器组件**的子组件内容，详情见 FormItem Props 和 FormTab Props | `Array<FormItemProps> \| Array<FormTabProps>` | `[]` |
+
+## FormTab Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| slot | `NTabPane` 的插槽 | - | - |
+| items | 子组件内容，详情见 FormItem Props | `Array<FormItemProps>` | `[]` |
 
 ### FormItemHook Properties
 
@@ -139,8 +146,16 @@ const form: FormProps = {
 | --- | --- | --- | --- |
 | props | 组件的属性 | - | - |
 | slots | 组件的插槽 | - | - |
-| name | 组件的名称 | `'Card' \| 'Divider' \| 'Input' \| 'Radio' \| 'Tabs'` | - |
-| items | **多子页面组件**的子组件内容，详情见 FormTabs Props | `Array<FormTabsProps>` | `[]` |
+| name | 组件的名称 | `'AutoComplete' \| 'Cascader' \| 'Checkbox' \| 'ColorPicker' \| 'DatePicker' \| 'DynamicInput' \| 'DynamicTags' \| 'Input' \| 'InputNumber' \| 'Mention' \| 'Radio' \| 'Rate' \| 'Select' \| 'Slider' \| 'Switch' \| 'Text' \| 'TimePicker' \| 'Transfer' \| 'TreeSelect'` | - |
+
+## FormContainer Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| props | 组件的属性 | - | - |
+| slots | 组件的插槽 | - | - |
+| name | 组件的名称 | `'Card' \| 'Divider' \| 'Tabs'` | - |
+| items | 子组件内容，详情见 FormItem Props | `Array<FormItemProps>` | `[]` |
 
 ## Form Events
 
